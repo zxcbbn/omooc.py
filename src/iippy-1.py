@@ -4,7 +4,7 @@
 
 import random
 import math
-import simplegui
+import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 import time
 
 
