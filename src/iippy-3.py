@@ -5,67 +5,61 @@ import random
 #init 
 record_list = []
 record_list_round = [] 
-count = 0
+count = -1
 range_choose = [0,100]
 
 #helper functions
 
-# definition of number_guess class
-class number_guess:
-    # initializer for range
-    def __init__(self, range_choose):
-        self.range = range_choose
-    # choose a number in a particular range
-    def number_choose(self):
-    	self.number_chosen = random.randint(self.range[0],self.range[1])
-    # review 
-    def review(self):
-    	number_chosen = self.number_chosen
-    	global record_list_round
-    	global record_list
-    	global count
-    	record_list_round.append(number_chosen)
-    	if record_list_round[0] != record_list_round[count]:
-    		count = count + 1
-    		record_list.append(record_list_round)
-    		count = 0
-    		record_list_round = [] 
+# choose a number in a particular range
+def number_choose(range_choose):
+    number_chosen = random.randint(range_choose[0],range_choose[1])
+    global record_list_round
+    global record_list
+    global count
+    record_list_round.append(number_chosen)
+    count = count + 1
+    if record_list_round[0] != record_list_round[count]:
+        record_list.append(record_list_round)
+        count = 0
+        record_list_round = [] 
+    return number_chosen
     
 # compare guessed number and picked number
 def number_compare(number_picked,number_guessed):
     global delta
     delta = number_guessed - number_picked
     if delta == 0:
-    	print "Amazing"
+        print "Amazing"
     elif delta > 0:
-    	print "Lower"
+        print "Lower"
     else:
-    	print "Higher"
+        print "Higher"
 # algorithm to change range 
 def range_change(range_choose,number_guessed):
-	global delta
-	i = 0
-	if delta < 0:
-		i = 0
-	else :
-		i = 1
-	range_choose[i] = (range_choose[i] + number_guessed)/2.0
-	range_choose[int(not i)] = number_guessed
+    global delta
+    i = 0
+    if delta < 0:
+        i = 0
+    else :
+        i = 1
+    range_choose[i] = (range_choose[i] + number_guessed)/2.0
+    range_choose[int(not i)] = number_guessed
 
 
 # event handlers
 def game_start():
-	global range_choose
-	num_pick = number_guess(range_choose)
-	num_pick.review
-	num_guess = number_guess(range_choose)
-	num_guess.review
-	print num_guess
-	number_compare(num_pick,num_guess)
-	while record_list_round[0] != record_list_round[count]:
-		range_change(range_choose,num_guess)
-		num_guess = number_guess(range_choose)
-		num_guess.review
+    global range_choose
+    num_pick = number_choose(range_choose)
+    num_guess = number_choose(range_choose)
+    print num_guess
+    print num_pick
+    print record_list_round
+    print type(num_guess)
+    number_compare(num_pick,num_guess)
+    while record_list_round[0] != record_list_round[count]:
+        range_change(range_choose,num_guess)
+        num_guess = number_choose(range_choose)
+    print record_list
 
 
 
