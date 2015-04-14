@@ -13,7 +13,7 @@ interval_list = [200,500,1000]
 width = 800
 height = 600
 shape_list = ["ball","triangle","square"]
-color_list = [rgb(255, 0, 0),"Blue","Green"]
+color_list = ['rgba(255, 0, 0, 0.3)',"Blue","Green"]
 record_list = []
 temp_record_list = []
 
